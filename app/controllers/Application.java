@@ -22,28 +22,28 @@ public class Application extends Controller {
 
   @Inject
   public Application(ActorSystem system) {
-    actor1 = system.actorOf(Actor1.getProps());
-    actor2 = system.actorOf(Actor2.getProps());
-    actor3 = system.actorOf(Actor3.getProps());
-    actor4 = system.actorOf(Actor4.getProps());
-    actor5 = system.actorOf(Actor5.getProps());
+    actor1 = system.actorOf(AkkaActor.getProps());
+    actor2 = system.actorOf(AkkaActor.getProps());
+    actor3 = system.actorOf(AkkaActor.getProps());
+    actor4 = system.actorOf(AkkaActor.getProps());
+    actor5 = system.actorOf(AkkaActor.getProps());
   }
 
     public Result main() {
 
-      FutureConverters.toJava(ask(actor1, new Compute(), 100000))
+      FutureConverters.toJava(ask(actor1, new Compute(0,200000), 1000))
         .thenApply(response -> ok(sum[0] =  String.valueOf(response)));
 
-      FutureConverters.toJava(ask(actor2, new Compute(), 100000))
+      FutureConverters.toJava(ask(actor2, new Compute(200001, 400000), 1000))
         .thenApply(response -> ok(sum[1] =  String.valueOf(response)));
       
-      FutureConverters.toJava(ask(actor3, new Compute(), 100000))
+      FutureConverters.toJava(ask(actor3, new Compute(400001,600000), 1000))
         .thenApply(response -> ok(sum[2] =  String.valueOf(response)));
 
-      FutureConverters.toJava(ask(actor4, new Compute(), 100000))
+      FutureConverters.toJava(ask(actor4, new Compute(600001,800000), 1000))
         .thenApply(response -> ok(sum[3] =  String.valueOf(response)));
 
-      FutureConverters.toJava(ask(actor5, new Compute(), 100000))
+      FutureConverters.toJava(ask(actor5, new Compute(800001,1000000), 1000))
         .thenApply(response -> ok(sum[4] =  String.valueOf(response)));
 
       long total = 0L;

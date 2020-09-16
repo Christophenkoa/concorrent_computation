@@ -4,10 +4,10 @@ import akka.actor.*;
 import akka.japi.*;
 import actors.HelloActorProtocol.*;
 
-public class Actor1 extends AbstractActor {
+public class AkkaActor extends AbstractActor {
 
   public static Props getProps() {
-    return Props.create(Actor1.class);
+    return Props.create(AkkaActor.class);
   }
 
   @Override
